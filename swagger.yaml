@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Entrevista
+  version: '1'
+paths:
+  /houses/{houseId}:
+    get:
+      summary: Obtener detalles de una casa
+      parameters:
+        - name: houseId
+          in: path
+          description: ID de la casa a obtener detalles
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Crear una casa
+      parameters:
+        - name: houseId
+          in: path
+          description: ID de la casa a crear
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ciudad:
+                  type: string
+                  example: benalmmma
+                calle:
+                  type: string
+                  example: avenida
+                pais:
+                  type: string
+                  example: españa
+      responses:
+        '200':
+          description: OK
+  /houses/{houseId}/{userId}:
+    delete:
+      summary: Eliminar una casa
+      parameters:
+        - name: houseId
+          in: path
+          description: ID de la casa a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: userId
+          in: path
+          description: ID del usuario propietario de la casa
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /users/{userId}:
+    delete:
+      summary: Eliminar un usuario
+      parameters:
+        - name: userId
+          in: path
+          description: ID del usuario a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: Actualizar detalles de un usuario de manera parcial
+      parameters:
+        - name: userId
+          in: path
+          description: ID del usuario a actualizar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: alex
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: Actualizar detalles de un usuario
+      parameters:
+        - name: userId
+          in: path
+          description: ID del usuario a actualizar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                correo:
+                  type: string
+                  example: nuevocorreo
+                nombre:
+                  type: string
+                  example: nuevonombre
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Obtener detalles de un usuario
+      parameters:
+        - name: userId
+          in: path
+          description: ID del usuario a obtener detalles
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /users:
+    get:
+      summary: Obtener lista de usuarios
+      responses:
+        '200':
+          description: OK
