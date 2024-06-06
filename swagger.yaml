@@ -3,13 +3,13 @@ info:
   title: Entrevista
   version: '1'
 paths:
-  /houses/{houseId}:
+  /houses/{userId}:
     get:
-      summary: Obtener detalles de una casa
+      summary: Obtener casas asociadas a un usuario
       parameters:
-        - name: houseId
+        - name: userId
           in: path
-          description: ID de la casa a obtener detalles
+          description: ID del usuario a obtener casas
           required: true
           schema:
             type: integer
@@ -22,7 +22,7 @@ paths:
       parameters:
         - name: houseId
           in: path
-          description: ID de la casa a crear
+          description: ID del usuario al que asociar la casa
           required: true
           schema:
             type: integer
@@ -143,6 +143,23 @@ paths:
   /users:
     get:
       summary: Obtener lista de usuarios
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Crear nuevo usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: alex
+                correo:
+                  type: string
+                  example: alex@outlook.com
       responses:
         '200':
           description: OK

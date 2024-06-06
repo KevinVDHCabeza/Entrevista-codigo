@@ -19,7 +19,6 @@ inicializarBaseDatos();
 
 app.use('/users', userRoutes);
 
-
 app.use('/houses', houseRoutes);
 
 // Iniciar el servidor
