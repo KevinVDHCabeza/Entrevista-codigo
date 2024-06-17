@@ -1,38 +1,37 @@
-#### Descripción General
+#### General Description
 
-El API REST diseñado ofrece endpoints para gestionar usuarios y sus viviendas. A continuación se detallan los principales endpoints y operaciones disponibles:
+The designed REST API offers endpoints to manage users and their houses. Below are the main endpoints and available operations:
 
-##### Usuarios
+##### Users
 
-- **GET /users**: Obtiene todos los usuarios.
-- **GET /users/{id}**: Obtiene un único usuario por su ID.
-- **POST /users**: Crea un nuevo usuario.
-- **PATCH /users/{id}**: Actualiza parcialmente un usuario existente.
-- **PUT /users/{id}**: Actualiza completamente un usuario existente.
-- **DELETE /users/{id}**: Elimina un usuario por su ID.
+- **GET /users**: Retrieves all users.
+- **GET /users/{id}**: Retrieves a single user by their ID.
+- **POST /users**: Creates a new user.
+- **PATCH /users/{id}**: Partially updates an existing user.
+- **PUT /users/{id}**: Fully updates an existing user.
+- **DELETE /users/{id}**: Deletes a user by their ID.
 
-##### Viviendas
+##### Houses
 
-- **GET /users/{userId}/houses**: Obtiene todas las viviendas de un usuario.
-- **GET /users/{userId}/houses?city={city}&street={street}&country={country}**: Obtiene las viviendas de un usuario aplicando filtros opcionales de ciudad, calle y país.
-- **POST /users/{userId}/houses**: Crea una nueva vivienda para un usuario.
-- **PATCH /users/{userId}/houses/{houseId}**: Actualiza parcialmente una vivienda de un usuario.
-- **PUT /users/{userId}/houses/{houseId}**: Actualiza completamente una vivienda de un usuario.
-- **DELETE /users/{userId}/houses/{houseId}**: Elimina una vivienda de un usuario por su ID.
-
----
-
-#### Justificación del Diseño
-
-- **Múltiples Métodos de Consulta**: Se utilizan diferentes métodos de consulta (GET, POST, PATCH, PUT, DELETE) para permitir la realización de diversas operaciones sobre los recursos de usuarios y viviendas.
-- **Operaciones RESTful**: Se sigue el principio de diseño RESTful para definir las operaciones de manera que sean intuitivas y sigan las convenciones del protocolo HTTP.
-- **Parámetros de Consulta**: Para el filtrado de viviendas se utilizan parámetros de consulta (query parameters) en lugar de path parameters, ya que los filtros son opcionales y no están directamente relacionados con la identificación de recursos.
-- **Códigos de Estado HTTP**: Se devuelven los códigos de estado HTTP adecuados para cada operación, por ejemplo, 200 OK para respuestas exitosas, 201 Created para creaciones exitosas, 404 Not Found para recursos no encontrados, y 400 Bad Request para solicitudes inválidas.
+- **GET /users/{userId}/houses**: Retrieves all houses of a user.
+- **GET /users/{userId}/houses?city={city}&street={street}&country={country}**: Retrieves the houses of a user applying optional filters of city, street, and country.
+- **POST /users/{userId}/houses**: Creates a new house for a user.
+- **PATCH /users/{userId}/houses/{houseId}**: Partially updates a user's house.
+- **PUT /users/{userId}/houses/{houseId}**: Fully updates a user's house.
+- **DELETE /users/{userId}/houses/{houseId}**: Deletes a user's house by its ID.
 
 ---
 
-#### Consideraciones Adicionales
+#### Design Justification
 
-- **Actualizar Usuarios Parcialmente vs. Completamente**: Se diferencia entre actualizar usuarios parcialmente (PATCH) y actualizarlos completamente (PUT) para ofrecer flexibilidad al cliente. La actualización parcial permite modificar solo ciertos campos, mientras que la actualización completa requiere el envío de todos los datos del usuario. Esto puede ser útil en diferentes escenarios según las necesidades del cliente.
-- **Borrar Usuarios con Viviendas**: Al intentar borrar un usuario que tiene viviendas asociadas, se devuelve un error (por ejemplo, 409 Conflict) para indicar que existen dependencias y que primero deben eliminarse las viviendas asociadas.
+- **Multiple Query Methods**: Different query methods (GET, POST, PATCH, PUT, DELETE) are used to allow various operations on user and house resources.
+- **RESTful Operations**: The RESTful design principle is followed to define operations in an intuitive manner that adheres to HTTP protocol conventions.
+- **Query Parameters**: Query parameters are used for house filtering instead of path parameters, as the filters are optional and not directly related to resource identification.
+- **HTTP Status Codes**: Appropriate HTTP status codes are returned for each operation, e.g., 200 OK for successful responses, 201 Created for successful creations, 404 Not Found for non-existent resources, and 400 Bad Request for invalid requests.
 
+---
+
+#### Additional Considerations
+
+- **Partial vs. Complete User Updates**: There is a distinction between partially updating users (PATCH) and fully updating them (PUT) to offer flexibility to the client. Partial updates allow modifying only certain fields, while full updates require sending all user data. This can be useful in different scenarios depending on the client's needs.
+- **Deleting Users with Houses**: When attempting to delete a user who has associated houses, an error (e.g., 409 Conflict) is returned to indicate that dependencies exist and the associated houses must be deleted first.
